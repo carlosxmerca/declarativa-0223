@@ -122,3 +122,45 @@ antepasado(X, Y) :-
 antepasado(X, Y) :- 
     madre(P, Y),
     antepasado(X, P).
+
+% Mostrar líneas de antepasados de una persona:
+linea_antepasados(X):-
+    \+ padre(_, X),
+    writeln('---'),
+    !.
+
+linea_antepasados(X):-
+    \+ madre(_, X),
+    writeln('---'),
+    !.
+
+linea_antepasados(X):-
+    padre(P,  X),
+    linea_antepasados(P),
+    writeln(P).
+
+linea_antepasados(X):-
+    madre(P,  X),
+    linea_antepasados(P),
+    writeln(P).
+
+% Mostrar líneas de descendientes de una persona:
+linea_descendientes(X):-
+    padre(X, H),
+    linea_descendientes(H),
+    writeln(H).
+
+linea_descendientes(X):-
+    madre(X, H),
+    linea_descendientes(H),
+    writeln(H).
+
+linea_descendientes(X):-
+    \+ padre(X, _),
+    writeln('---'),
+    !.
+
+linea_descendientes(X):-
+    \+ madre(X, _),
+    writeln('---'),
+    !.
