@@ -58,3 +58,21 @@ leer_lista(Lista) :-
 % Predicado principal para comenzar la lectura
 iniciar_lectura(Lista) :-
     leer_lista(Lista).
+
+% Eliminar cabeza de lista
+eliminar_cabeza([_ | Col], Col) :- !.
+
+% Eliminar un elemento de lista
+eliminar_elemento([], _, []) :- !.
+eliminar_elemento([Elemento | Col], Elemento, Col) :- !.
+eliminar_elemento([Cab | Col], Elemento, [Cab | Ltemp]) :-
+    eliminar_elemento(Col, Elemento, Ltemp).
+
+% Eliminar todas las ocurrencias de un elemento en la lista
+eliminar_ocurrencias([], _, []) :- !.
+eliminar_ocurrencias([Elemento | Col], Elemento, Ltemp) :- 
+    eliminar_ocurrencias(Col, Elemento, Ltemp),
+    !.
+
+eliminar_ocurrencias([Cab | Col], Elemento, [Cab | Ltemp]) :-
+    eliminar_ocurrencias(Col, Elemento, Ltemp).
