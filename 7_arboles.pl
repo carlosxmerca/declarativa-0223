@@ -48,4 +48,28 @@ ins_abb([SI, DatoN, SD], Dato, [SI, DatoN, SD2]) :-
     ins_abb(SD, Dato, SD2),
     !.
 
+% Eliminar una hoja de un árbol binario
+% de búsqueda:
+eliminar_hoja_abb([ ], _, [ ]):-
+    writeln('El dato no se encuentra en el árbol'),
+    !.
+
+eliminar_hoja_abb([[ ], Dato, [ ]], Dato, [ ]):-
+    writeln('El dato ha sido eliminado'),
+    !.
+
+eliminar_hoja_abb([SI, Dato, SD], Dato, [SI, Dato, SD]):-
+    writeln('El dato no es una hoja.'),
+    writeln('No ha sido eliminado'),
+    !.
+
+eliminar_hoja_abb([SI, DatoN, SD], Dato, [SI2, DatoN, SD]):-
+    <(Dato, DatoN),
+    eliminar_hoja_abb(SI, Dato, SI2),
+    !.
+
+eliminar_hoja_abb([SI, DatoN, SD], Dato, [SI, DatoN, SD2]):-
+    >(Dato, DatoN),
+    eliminar_hoja_abb(SD, Dato, SD2).
+
 % T = [[[], 20, []], 50, [[], 60, []]].
